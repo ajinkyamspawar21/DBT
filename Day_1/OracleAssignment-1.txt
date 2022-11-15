@@ -1,0 +1,136 @@
+﻿Create  following Tables.
+
+1. Vehicle 
+   Vid    Vname         Price          desc
+    1     Activa        80000          Two wheeler.Sturdy.Milage 30 km
+    2     Santro        800000         Product of Hyandai.
+    3     Motor bike    100000         Sturdy and good milage
+-------------------------------------------------------------------------------------------------------------------------------------------
+create table Vehicle
+(
+	Vid number(2),
+	Vname varchar2(12),
+	Price number(6),
+	describe varchar2(30)
+);
+
+insert into Vehicle
+values(1,'Activa',80000,'Two wheeler.Sturdy.Milage 30km');
+insert into Vehicle
+values(2,'Santro',800000,'Product of Hyundai');
+insert into Vehicle
+values(3,'Motor Bike',100000,'Sturdy and good milage');
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+2. Customer
+   Custid Cname     address
+     1    Nilima    Pimpri
+     2    Ganesh    Pune
+-------------------------------------------------------------------------------------------------------------------------------------------
+create table Customer
+(
+Custid number(2),
+Cname varchar2(10),
+Customer varchar2(10)
+);
+
+insert into Customer
+values(1,'Nilima','Pimpri');
+insert into Customer
+values(2,'Ganesh','Pune'); 
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+ 
+
+3. Salesman
+   Sid    Sname    address
+   10     Rajesh   mumbai
+   11     Seema    Pune
+   13     Rakhi    pune
+ -------------------------------------------------------------------------------------------------------------------------------------------
+create table Salesman
+(
+   Sid number(2),
+   Sname varchar2(15),
+   address varchar2(15)
+);
+  insert into Salesman
+  values(10,'rajesh','mumbai');
+  insert into Salesman
+  values(11,'Seema','Pune');
+  insert into Salesman
+  values (13, 'Rekha','pune'); 
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+4. cust_vehicle (customer is buying one vehicle of one type)
+   Custid Vid Sid   Buy_price
+    1     1    10   75000
+    1     2    10   790000
+    2     3    11   80000
+    3     3    11   75000
+    3     2    10   800000
+-------------------------------------------------------------------------------------------------------------------------------------------
+create table cust_vehicle
+ (
+    custid number(2),
+    vid number(2),
+    Sid number(2),
+    Buy_price number(10)
+ );
+
+insert into cust_vehicle
+values(1,1,10,75000);
+insert into cust_vehicle
+values(1,2,10,790000);
+insert into cust_vehicle
+values(2,3,11,80000);
+insert into cust_vehicle
+values(3,3,11,75000);
+insert into cust_vehicle
+values(3,2,10,800000);
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Display names of salesmen who work in Pune.
+
+select Sname from Salesman
+where address='Pune';
+-------------------------------------------------------------------------------------------------------------------------------------------
+2. Delete customer from Pimpri area.
+delete from Cutoemr
+where Customer='Puimpri';
+-------------------------------------------------------------------------------------------------------------------------------------------
+3. Display information of vehicle , Motor bike.
+select Vid,Vname,Price,describe from Vehicle 
+where Vid=3;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+4. If buying price of the vehicle is 75000 then change it to 80000.
+update cust_vehicle
+set Buy_price=80000
+where Buy_price=75000;
+-------------------------------------------------------------------------------------------------------------------------------------------
+5. Add new column by name rating in cust_vehicle table.
+alter table cust_vehicle
+add rating number(5);
+-------------------------------------------------------------------------------------------------------------------------------------------
+6. Give rating 5 to all the vehicles with price greater than 90000.
+update cust_vehicle
+set rating=5
+where Buy_price>90000;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+7. Delete all the records from Customer table.
+truncate table Customer;
+-------------------------------------------------------------------------------------------------------------------------------------------
+8. Delete entire table Salesman.
+drop table Salesman;
+
+
+ 
