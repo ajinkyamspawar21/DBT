@@ -1,0 +1,114 @@
+Note : Use Emp, dept and salgrade table
+
+1. To list all records with sal > 2000 and comm>200
+--------------------------------------------------------------------------------------------------------
+select  empno,ename,job,mgr,hiredate,sal
+from emp
+where sal>2000 and empno>7000;
+--------------------------------------------------------------------------------------------------------
+2. To list all record with job=’Clerk’ or sal>2000
+--------------------------------------------------------------------------------------------------------
+select empno,ename,job,mgr,hiredate,sal,comm
+from emp
+where job='Clerk' or sal>2000;
+
+--------------------------------------------------------------------------------------------------------
+
+3. To list all the record with sal=1250 or 1100 
+--------------------------------------------------------------------------------------------------------
+ select empno,ename ,job, mgr, hiredate, sal, comm 
+ from emp
+ where  sal= 1250 or sal=1100;
+--------------------------------------------------------------------------------------------------------
+
+4. To list all employees with sal>1250 and <2850
+--------------------------------------------------------------------------------------------------------
+select empno,ename,job,mgr,hiredate,sal
+from emp 
+where sal>1250 and sal<2850;
+--------------------------------------------------------------------------------------------------------
+
+
+5. Retrieve the details (Name, Salary and dept no) of the emp who are working in department code 20
+--------------------------------------------------------------------------------------------------------
+select ename,sal,deptno
+from emp
+where deptno=20;
+--------------------------------------------------------------------------------------------------------
+6. Display the total salary of all employees . Total salary will be calculated as sal+comm+sal*0.10
+--------------------------------------------------------------------------------------------------------
+select empno,ename,job,mgr,sal+comm+(sal*0.10) as "amount"
+from emp;
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+7. Display all employees who have joined after 9th june 81.
+--------------------------------------------------------------------------------------------------------
+select ename
+from emp
+where hiredate>'09-JUN-81';
+
+--------------------------------------------------------------------------------------------------------
+8. Display empno,empname,sal, comm and total salary.
+   Total Salary = comm + sal;
+--------------------------------------------------------------------------------------------------------
+select empno,ename,sal,comm,comm+sal as "Total Salary"
+from emp;
+
+--------------------------------------------------------------------------------------------------------
+9. Display empname,deptno,dname for all employees.
+--------------------------------------------------------------------------------------------------------
+select emp.ename,emp.deptno,dept.dname
+from emp,dept;
+
+--------------------------------------------------------------------------------------------------------
+10. Display empname,deptno,dname for Smith. 
+--------------------------------------------------------------------------------------------------------
+OMIT
+
+--------------------------------------------------------------------------------------------------------
+
+For the tables below add constraints to the tables.
+
+1. Vehicle 
+   Vid    Vname         Price          desc
+    1     Activa        80000          Two wheeler.Sturdy.Milage 30 km
+    2     Santro        800000         Product of Hyandai.
+    3     Motor bike    100000         Sturdy and good milage
+Add  Pk vid
+
+--------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------
+
+
+2. Customer
+   Custid Cname     address
+     1    Nilima    Pimpri
+     2    Ganesh    Pune
+Add PK Custid
+--------------------------------------------------------------------------------------------------------
+
+create table Customer1
+(
+Custid number(2),
+Cname varchar2(10),
+address varchar2(10)
+);
+alter table Customer1
+add primary key(Custid);
+--------------------------------------------------------------------------------------------------------
+
+
+3. Salesman
+   Sid    Sname    address
+   10     Rajesh   mumbai
+   11     Seema    Pune
+   13     Rakhi    pune
+Add PK Sid
+
+
+
+ 

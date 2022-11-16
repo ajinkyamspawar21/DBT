@@ -1,0 +1,30 @@
+create table emp1
+(
+      dno number(2) not null primary key,
+      ename varchar2(10) not null, 
+      eno number(3) not null,
+      sal number(5) not null,
+      foreign key (dno) references dept1(deptno)
+);
+
+insert into emp1
+values(10,'Omi',10,4000);
+insert into emp1
+values(20,'Aks',30,5000);
+
+
+create table dept1
+(
+        deptno number (3) not null primary key,
+        dname varchar2(10) not null,
+         city varchar2(10) not null
+);
+
+insert into dept1
+values(10,'gj','PUNE');
+insert into dept1
+values(20,'hj','MUMBAI');
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
