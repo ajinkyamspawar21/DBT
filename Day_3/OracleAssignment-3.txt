@@ -1,0 +1,143 @@
+1. Find all employees with name ending with R  
+-------------------------------------------------------------------------------------------------------
+-----select ename
+      from emp
+      where  ename like '%R';
+-------------------------------------------------------------------------------------------------------
+2. Find all employees with name starting with M and ending with R
+-------------------------------------------------------------------------------------------------------
+----select ename
+     from emp
+     where  ename like 'M%'and ename like '%R';
+-------------------------------------------------------------------------------------------------------
+3. Find all employees with name having L at 3 rd position
+-------------------------------------------------------------------------------------------------------
+----select ename
+     from emp
+     where  ename like '__R%';
+-------------------------------------------------------------------------------------------------------
+4. Find all employees with name starting with M has L at 3 rd position and ends with R
+-------------------------------------------------------------------------------------------------------
+select ename
+om emp
+where  ename like 'M_L.*R';
+-------------------------------------------------------------------------------------------------------
+5. Find all employees with name having L at 3 rd position and E at second last position
+-------------------------------------------------------------------------------------------------------
+select ename
+from emp
+where  ename like '__L%E_';
+-------------------------------------------------------------------------------------------------------
+6. To find all employees with name starting with either M or A
+-------------------------------------------------------------------------------------------------------
+----select ename
+from emp
+where  ename like 'M%'or ename like 'A%';
+
+-------------------------------------------------------------------------------------------------------
+7. To find all employees with name starting with either M or A and last character as either R or E
+-------------------------------------------------------------------------------------------------------
+----select ename
+from emp
+where  (ename like 'M%'or ename like 'A%')and (ename like '%R'or ename like '%E');
+
+-------------------------------------------------------------------------------------------------------
+8. To find all employee with name starting with a or m and ending with e
+-------------------------------------------------------------------------------------------------------
+----select ename
+from emp
+where (ename like 'K%'or ename like 'M%')and (ename like '%G');
+-------------------------------------------------------------------------------------------------------
+9. Find all employees with name starting with A and ending with e, or it may starts with s and end with h
+-------------------------------------------------------------------------------------------------------
+----select ename
+from emp
+where ( ename like 'A%'and ename like '%E')or (ename like 'S%' and ename like '%H');
+
+-------------------------------------------------------------------------------------------------------
+10. Find all employees with name not starting with A or M
+-------------------------------------------------------------------------------------------------------
+----select ename
+from emp=-0987654321`
+';lkikjkjhgeoiuytrewq	ZXCVFGBHNJMK,./.,MNG/                            ZCFV VGBB N N NM*+
++-where not ename like 'A%' or  ename like 'M%';
+
+------------------------------------------------------------------------------------------------------
+11. Display all employees with sal >1000 and sal<3000 and job has a at starting position and ends with t.
+ =-0987654321`\ To display all employees empno, ename, sal , increased sal by 10% ,also add commission for all employees whose name 
+    starts with a,m or s
+-------------------------------------------------------------------------------------------------------
+select job,sal from emp
+where regexp_like(sal, job, 'sal>1000 and sal<3000 | ^A.*T$');
+-------------------------------------------------------------------------------------------------------
+12.Select all employee with job is either CLERK or SALESMAN and sal >2000
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+13. Display all employees whose name starts with A and ends with either n or s, or works in dept 10
+--------------------------------------------------------------------------------------------------------------
+select ename
+from emp
+where(( ename like 'A%') and  ( ename like '%N'or ename like '%S')) or (deptno=10);
+
+
+-------------------------------------------------------------------------------------------------------
+14. Display all employees who works in either dept 10 or 30 or joined in year 1982
+-------------------------------------------------------------------------------------------------------
+select ename
+from emp
+where deptno=10 or deptno=30 or hiredate between ' 31-dec-1982'and '01-jan-1983';
+where deptno=10 or deptno=30 or hiredate>' 31-dec-1982'and hiredate<'01-jan-1983';
+-------------------------------------------------------------------------------------------------------
+15. Display all employees with sal >2000 or job is either clerk or Salesman
+-------------------------------------------------------------------------------------------------------
+select ename
+from emp
+where sal>2000 or (job='clerk' or job='Salesman');
+-------------------------------------------------------------------------------------------------------
+16. list all departments whose name has atleast 7 characters.
+select dname
+from dept
+where regexp_like(dname,'^[A-Za-z]{7}');
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+17. list all departments whose name has atleast 5 characters.
+    Select * From dept
+    Where dname REGEXP ‘^[A-Za-z]{5}
+-------------------------------------------------------------------------------------------------------
+same as above 
+
+-------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------
+1.1. to find increased sal by 1/3 
+-------------------------------------------------------------------------------------------------------
+select ename,sal,sal+(sal*0.3)"increased salary "
+from emp;
+
+-------------------------------------------------------------------------------------------------------
+1.2. Find all employees whose sal is divisible by 3  
+-------------------------------------------------------------------------------------------------------
+select ename ,sal
+from emp
+where mod(sal,3)=0;
+-------------------------------------------------------------------------------------------------------
+1.3. write query to display name followed by 4 stars followed by sal 
+-------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------
+1.4. display email as ename followed by mycompany.com
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+1.5. Display email as 1st 3 chacarters of ename, followed by dot, followed by 2 and 3rd character of jobs,followed by 
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+1.6. Display string “Hello” followed by name followed by ! for all employees who earned commission
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+1.7. display all names length of each name should be 10 characters , add required spaces on 
+left side of name, also display jobs, length of jobs should be 9 characters add required –
+on the right side of job
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+ 
+ 
