@@ -1,0 +1,14 @@
+Day 4 class work:
+
+create table new_emp
+as 
+select *
+from emp 
+where 1=2; 
+
+select deptno,count(*)
+from emp
+where deptno=10
+group by deptno;
+   
+
