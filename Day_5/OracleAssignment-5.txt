@@ -1,0 +1,246 @@
+1. Display employee name who is earning maximunm salary.
+--------------------------------------------------------------------------------------------------------------
+select ename
+from emp
+where sal = (select max(sal)
+                      from emp);
+--------------------------------------------------------------------------------------------------------------
+2. Find al1 employees who work in the department where martin works.
+--------------------------------------------------------------------------------------------------------------
+select * 
+from emp
+where deptno =(select deptno
+	           from emp 
+	           where ename='MARTIN')
+order by sal;
+--------------------------------------------------------------------------------------------------------------
+3. Find all employees who work in the department where Smith works or Allen works
+--------------------------------------------------------------------------------------------------------------
+select * 
+from emp 
+where sal in ( select sal 
+	      from emp 
+	      where ename  in ('ALLEN','SMITH'))
+order by sal;
+--------------------------------------------------------------------------------------------------------------
+4. Display all who earn more than Allen or Smith.
+--------------------------------------------------------------------------------------------------------------
+select * 
+from emp 
+where sal in ( select sal 
+	      from emp 
+	      where ename  in ('ALLEN','SMITH'))
+order by sal;
+--------------------------------------------------------------------------------------------------------------
+5. Delete all employees who work in Smith's dept and earn more than 1200 as a sal.
+--------------------------------------------------------------------------------------------------------------
+delete 
+from emp 
+where deptno=(select deptno
+	         from emp 
+	         where ename='SMITH')
+and sal>1200;
+	         
+--------------------------------------------------------------------------------------------------------------
+6. Change the sal of Smith to same a Jones.
+--------------------------------------------------------------------------------------------------------------
+update emp 
+set sal=(select sal from emp 
+              where ename='JONES')
+where ename='SMITH';
+--------------------------------------------------------------------------------------------------------------
+7. Increase the salary by 10% in the database for all employees having experience more than 40 years
+--------------------------------------------------------------------------------------------------------------
+update emp 
+set sal =(sal+sal*0.10)
+where floor(months_between(sysdate,hiredate)/12)>40;
+--------------------------------------------------------------------------------------------------------------
+
+8. Implement following using case statement. Use data from emp database.
+   If comm is null ‘need improvement’ If <500 “ok” If >=500 and < 1000 ‘good' ‘Excellent'
+--------------------------------------------------------------------------------------------------------------
+select  ename,comm,sal,
+case   
+           when comm is null then 'need improvment'
+           when comm<500 then  'ok'
+           when comm >=500  and comm<=1000 then'good'
+           when comm >1000 then'excellent'
+   end 
+from emp; 
+
+
+
+--------------------------------------------------------------------------------------------------------------
+9. For any available table create a sequence and check how it works.
+--------------------------------------------------------------------------------------------------------------
+create table serial 
+(
+ srno number(2),
+name varchar2(15),
+sal number(10)
+);
+
+
+create sequence myseq
+start with 1
+increment by 1
+minvalue 1
+maxvalue 100
+nocycle;
+insert into serial
+values(myseq.nextval,'seeta',8000);
+
+
+--------------------------------------------------------------------------------------------------------------
+10 From the emp table, write a SQL query to find out which employees have the same job as the employee whose 
+   eno is ID is 7499. Return ename,job,deptno.
+--------------------------------------------------------------------------------------------------------------
+select  job ,ename ,sal
+from emp
+where job= (select job
+                     from emp                 
+                     where empno=7499);
+
+
+
+--------------------------------------------------------------------------------------------------------------
+11.From the emp table, write a SQL query to find those employees who receive a higher salary than the employee 
+   with eno 7499. Return ename,job,deptno,sal.
+--------------------------------------------------------------------------------------------------------------
+select  sal ,ename ,job
+from emp
+where  sal>(select sal
+                     from emp                 
+                     where empno=7499);
+
+
+
+
+--------------------------------------------------------------------------------------------------------------
+12. From the emp table, write a SQL query to find those employees whose salary matches the lowest salary of any 
+    of the departments. Return name, and department ID.   
+--------------------------------------------------------------------------------------------------------------
+select sal, ename,job
+from emp 
+where sal in ( select min(sal)
+                       from emp
+                       group by deptno );
+
+
+--------------------------------------------------------------------------------------------------------------
+13.From the emp table, write a SQL query to find those employees who earn more than the average salary. Return
+    employee ID,  name,sal.  
+--------------------------------------------------------------------------------------------------------------
+select sal, ename,job
+from emp 
+where sal >( select avg(sal)
+                       from emp );
+-------------------------------------------------------------------------------------------------------------- 
+14.From the emp table, write a SQL query to find those employees who report to that manager whose name
+   starts with  ‘F’. Return employee ID,  name,sal.  
+--------------------------------------------------------------------------------------------------------------
+select empno,ename,sal
+from emp
+where mgr=(select empno
+                      from emp
+                      where ename like 'F%'); 
+
+
+--------------------------------------------------------------------------------------------------------------   
+15. From the emp table, write a SQL query to find those employees whose salary is in the range of 1000, and 3000
+   (Begin and end values included.). Return all the fields. 
+--------------------------------------------------------------------------------------------------------------
+select *
+from emp
+where sal between 1000 and 3000
+order by sal;
+
+
+
+--------------------------------------------------------------------------------------------------------------
+16. From the emp table , write a SQL query to find those employees whose salary falls within the range of the smallest
+    salary and 2500. Return all the fields.
+--------------------------------------------------------------------------------------------------------------
+select  sal ,ename
+from emp
+where sal >=(select min (sal)
+                    from emp)
+and sal<2500;
+
+--------------------------------------------------------------------------------------------------------------
+ 
+
+Co-related Queries:
+create table product1
+( 
+pid number(2),
+pname varchar2(10)
+);
+
+insert into product1
+values(1,'PEN');
+insert into product1
+values(2,'PENCIL');
+insert into product1
+values(3,'BOTTLE');
+insert into product1
+values(4,'BADAK');
+
+create table salesman1 
+( 
+sno number(2),
+sname varchar2(10),
+sid number(2)
+);
+
+insert into salesman1
+values(10,'KIRAN',1);
+insert into salesman1
+values(20,'KARA',2);
+insert into salesman1
+values(30,'KRUTIK',3);
+insert into salesman1
+values(40,'KARTIK',1);
+
+
+1)EXISTS
+select sid
+from salesman1
+where exists (select pid
+	     from product1
+	     where product1.pid=salesman1.sid);
+
+2) NOT EXISTS
+select pid
+from product1
+where not exists (select sid
+	     from salesman1
+	     where product1.pid=salesman1.sid);
+
+--------------------------------------------------------------------------------------------------------------------------
+17. Write a query which will display dept no and dept names to which no employee is assigned.
+18. Find employees who earn salary more than the avg sal of their dept.
+19. Display all employees with sal more than his manager's sal.
+
+-----------------------------------------------------------------
+Solutions::
+
+18. select * 
+    from emp e
+    where sal > (select avg(sal)
+                 from emp d
+                 where d.deptno = e.deptno);
+
+19. select *
+    from emp e
+    where sal<=(select sal
+		from emp m
+  		where m.empno=e.mgr);
+
+
+ 
+
+ --------------------------------------------------------------------------
+
+
+

@@ -1,0 +1,15 @@
+1) 
+select * 
+from emp
+where sal > ( select sal 
+	    from emp 
+	    where ename='ALLEN')
+order by sal;
+
+2) 
+select * 
+from emp 
+where sal in ( select sal 
+	      from emp 
+	      where ename  in ('ALLEN','SMITH'))
+order by sal;

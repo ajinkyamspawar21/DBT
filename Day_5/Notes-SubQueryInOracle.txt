@@ -1,0 +1,61 @@
+diplay all employees working in research dept
+
+select * 
+from emp
+where deptno=(select deptno
+		from dept200
+		where dname='RESEARCH');
+
+create table dept200
+as
+select * 
+from dept
+where 1=2;
+
+insert into dept200
+values(10,'RESEARCH','PUNE');
+insert into dept200
+values(20,'ACC','MUMBAI');
+insert into dept200
+values(30,'SALES','PATNA');
+insert into dept200
+values(40,'TECH','DELHI');
+
+--------------------------------
+
+display employee earning more than Smith and allan
+
+select * 
+from emp
+where sal >all (select sal 
+                from emp
+                where ename in ('SMITH','ALLEN'));
+
+---------------------------------------------------------
+
+display employee earning more than Smith or allan
+
+select * 
+from emp
+where sal >any (select sal 
+                from emp
+                where ename in ('SMITH','ALLEN'));
+
+
+select * 
+from emp
+where sal between (select sal 
+                   from emp
+                   where ename='SMITH')
+          and(select sal 
+                   from emp
+                   where ename='ALLEN');
+----------------------------- 
+
+display name of employee earning max sal
+
+select ename,sal
+from emp
+where sal = max(sal);
+
+
