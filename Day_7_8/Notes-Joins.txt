@@ -1,0 +1,42 @@
+inner equi join
+
+select e.empno,e.ename,e.deptno emp,d.deptno dept,d.dname
+from emp e
+inner join dept d
+on e.deptno=d.deptno;
+
+--------------------------
+
+no equi
+
+select e.empno,e.ename,e.sal,s.grade
+from emp e
+inner join salgrade s
+on e.sal between s.losal and s.hisal;
+
+
+ 
+-------------------------------
+
+select e.empno,e.ename empName,e.mgr,m.empno "for manager" ,m.ename
+from emp e
+ join emp m
+on e.mgr=m.empno;
+
+
+insert into 
+----------------------------------------
+select e.empno,e.ename  ,e.deptno,d.dname
+from emp e
+left join dept d
+on e.deptno=d.deptno;
+-----------------------------------
+
+insert into emp(empno,ename,job,deptno)
+values(9999,'Geeta','Manager',60);
+insert into emp(empno,ename,job,deptno)
+values(9998,'Seeta','Analyst',50);
+
+
+select distinct deptno 
+from emp;

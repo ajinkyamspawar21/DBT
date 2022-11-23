@@ -1,0 +1,292 @@
+create following tables and solve following questions
+1. faculty(fid(PK),fname,sp.skill1,sp.skill2)
+   
+    CREATE TABLE faculty(
+   fid number primary key,
+   fname varchar2(20) not null,
+   sp_skill1 varchar2(30),
+   sp_skill2 varchar2(30));
+
+ INSERT into  faculty values(10,'Amol','database','JAVA');
+ INSERT into  faculty values(11,'Asha','Java','Mysql');
+ INSERT into  faculty values(12, 'Kiran','CPP','Database');
+ INSERT into  faculty values(13,'Seeta','MySQL','Database');
+
+
+faculty
+fid fname spskill1 spskill2
+10 Amol database JAVA
+11 Asha JAVA MySQL
+12 Kiran CPP Database
+13 Seeta MySQL database
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. courses(cid(PK),cname,rid,fid(FK))
+
+   create table courses(
+   cid number primary key,
+   cname varchar2(15) not null,
+   rid number, foreign key(rid) references room(rid)
+   on delete set null, 
+   fid number, foreign key(fid) references faculty(fid)
+   on delete set null
+    );
+
+
+courses
+cid cname rid fid
+121 DBDA 100 10
+131 DAC 101
+141 DTISS
+151 DIOT 105 12
+
+    INSERT into  courses values(121,'DBDA',100, 10);
+    INSERT into courses (cid, cname, rid) values(131,'DAC',101);
+    INSERT into courses (cid, cname) values(141,'DTISS');
+    INSERT into courses values(151,'DIOT',105, 12);
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. room(roomid,rname,rloc)
+
+   CREATE TABLE room(
+   rid number primary key,
+   rname varchar2(15) not null,
+   rloc varchar2(20));
+
+
+Room
+roomid rname rloc
+100 jasmin 1st floor
+101 Rose 2nd floor
+105 Lotus 1st floor
+103 Mogra 1st floor
+
+
+INSERT into room values(100,'Jasmin','1st floor');
+INSERT into room values(101,'Rose','2nd floor');
+INSERT into room values(105,'Lotus','1st floor');
+INSERT into room values(103,'Mogra','1st floor');
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. list all courses for which no room is assigned and all rooms which are available
+
+select c.cid,c.cname,r.rid,r.rname,r.rloc
+from courses c full join room r 
+on c.rid=r.rid
+where c.rid is null 
+or
+r.rid is null;
+
+
+select c.cid,c.cname,r.rid,r.rname
+from courses c 
+full join room r
+on c.rid=r.rid
+where c.rid is null;
+
+2. list all faculties who are not allocated to any course and rooms which are not
+allocated to any course
+ ??????
+
+3. list all rooms which are allocated or not allocated to any courses
+    select  r.rid, c.cname, r.rname
+    from room r
+    left join courses c
+    on c.rid=r.rid;
+   
+
+4. list all rooms which are not allocated to any courses
+select rid,rname
+from room r
+where not exists (select *
+ from courses c
+ where c.rid=r.rid);
+
+5. display courses and faculty assigned to those courses whose special skill is
+  database
+select c.cname,f.fname,f.fid
+from courses  c
+full join faculty f
+on f.fid = c.fid
+where sp_skill1='database'  or sp_skill2='Database';
+
+
+6. display time table --- it should contain course details , faculty and room details
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    INSERT into   salesman values(13,'Prasad','Nashik');
+    INSERT into   salesman values(14,'Arnav','Amravati');
+  
+category ---- cname unique and not null
+cid cname description
+1 chips very crunchy
+2 chocolate very chocolaty
+3 snacks yummy
+4 cold drinks thanda thanda cool cool
+
+   create table category(
+   cid number primary key,
+   cname varchar2(15) unique not null,
+   description varchar2(30));
+
+
+   INSERT into  category values(1,'chips','crunchy');
+   INSERT into   category values(2,'chocolate','very chocolaty');
+   INSERT into   category values(3,'snacks','yummy');
+   INSERT into   category values(4,'cold drinks','thanda thanda cool cool');
+
+
+
+
+1. List all products with category chips
+ 
+2. display all products sold by kirti
+
+3. display all salesman who do not sold any product
+
+4. display all category for which no product is there
+
+
+5. display all products with no category assigned
+
+6. list all salesman who stays in city with name starts with P or N
+
+7. add new column in salesman table by name credit limit
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7.
+
+   create table Product(
+   pid number primary key,
+   pname varchar2(20),
+   price number(6,2) default 20.00,
+   qty number check(qty>0),
+   cid number ,
+   sid number,
+   constraint fk_cid foreign key(cid) references category(cid) on delete set null,
+   constraint fk_sid foreign key(sid) references salesman(sid)  
+   );
+
+
+prodid pname qty price catid sid
+123 lays 30 30.00 1 12
+111 pepsi 40 50.00 4 11
+134 nachos 50 50.00 1 12
+124 dairy milk 40 60.00 2 14
+124 pringles 40 60.00 1 14
+
+    INSERT into   product values(123,'lays',30,30.00,1,12);
+    INSERT into   product values(111,'pepsi',40,50.00,4,11);
+    INSERT into   product values(134,'nachos',50,50.00,1,12);
+    INSERT into   product values(124,'dairy milk',40,60.00,2,14);
+    INSERT into   product values(125,'pringles',40,60.00,1,14);
+
+    
+saleman ----- sname -----not null
+sid sname city
+11 Rahul Pune
+
+12 Kirti Mumbai
+13 Prasad Nashik
+14 Arnav Amaravati
+ 
+    create table salesman(
+   sid number primary key,
+   sname varchar2(15) unique not null,
+   city varchar2(15));
+
+    INSERT into   salesman values(11,'Rahul','Pune');
+    
+    INSERT into   salesman values(12,'Kirti','Mumbai');
+ 
+    INSERT into   salesman values(13,'Prasad','Nashik');
+    INSERT into   salesman values(14,'Arnav','Amravati');
+  
+category ---- cname unique and not null
+cid cname description
+1 chips very crunchy
+2 chocolate very chocolaty
+3 snacks yummy
+4 cold drinks thanda thanda cool cool
+
+   create table category(
+   cid number primary key,
+   cname varchar2(15) unique not null,
+   description varchar2(30));
+
+
+   INSERT into  category values(1,'chips','crunchy');
+   INSERT into   category values(2,'chocolate','very chocolaty');
+   INSERT into   category values(3,'snacks','yummy');
+   INSERT into   category values(4,'cold drinks','thanda thanda cool cool');
+***************************************************************************************************************************************************
+1. List all products with category chips
+---------------------------------------------------------------------------------------------------------------------------------------------- 
+select c.cid, p.cid, c.cname,p.pname
+from category c
+full join product2143 p
+on c.cid=p.cid
+where p.cid=1;
+ 
+
+
+ 
+----------------------------------------------------------------------------------------------------------------------------------------------
+2. display all products sold by kirti
+----------------------------------------------------------------------------------------------------------------------------------------------
+select  s.sname,p.pname
+from salesman s
+right join product2143 p
+on s.sid=p.sid
+where s.sid= 12;
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+3. display all salesman who do not sold any product
+----------------------------------------------------------------------------------------------------------------------------------------------
+select s.sname,s.city
+from salesman s
+where  not exists (select p.sid from product2143 p where s.sid=p.sid ) ;
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+4. display all category for which no product is there
+----------------------------------------------------------------------------------------------------------------------------------------------
+select c.cname 
+from category c
+where not exists(select p.sid from product2143 p where c.cid= p.cid);
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+5. display all products with no category assigned
+----------------------------------------------------------------------------------------------------------------------------------------------
+select p.pname 
+from product2143 p
+where not exists (select c.cid from category c where c.cid=p.cid);
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+6. list all salesman who stays in city with name starts with P or N
+----------------------------------------------------------------------------------------------------------------------------------------------
+select *
+from salesman 
+where  regexp_like(city,'^[PN]');
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+7. add new column in salesman table by name credit limit
+----------------------------------------------------------------------------------------------------------------------------------------------
+alter table salesman
+add  credit_limit number(4); 
+----------------------------------------------------------------------------------------------------------------------------------------------
+
