@@ -1,0 +1,18 @@
+left    right
+emp----->dept
+
+select emp.ename,emp.deptno,dept.deptno
+from emp
+left join dept
+on emp.deptno=dept.deptno;
+
+Will give all the rows fron emp database
+-----------------------------------------
+select emp.ename,emp.deptno,dept.deptno
+from emp
+right join dept
+on emp.deptno=dept.deptno;
+
+Will give all the rows from dept database
+
+----------------------------------------
